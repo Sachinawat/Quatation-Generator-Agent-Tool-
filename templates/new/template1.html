@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quotation</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+            background: #FFF;
+            font-size: 12px;
+        }
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .company-details, .client-details {
+            width: 48%;
+        }
+        .company-details h1 {
+            margin: 0;
+            color: #333;
+        }
+        .quote-details {
+            text-align: right;
+        }
+        .quote-details h2 {
+            margin: 0;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #eee;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background: #f4f4f9;
+            font-weight: bold;
+        }
+        .total {
+            text-align: right;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .footer {
+            margin-top: 20px;
+        }
+        .terms h3 {
+            margin-top: 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="company-details">
+                <h1>{{ company_name }}</h1>
+                <p>{{ company_address }}</p>
+            </div>
+            <div class="quote-details">
+                <h2>Quotation</h2>
+                <p><strong>Quote ID:</strong> {{ quote_id }}</p>
+                <p><strong>Date:</strong> {{ date }}</p>
+                <p><strong>Validity:</strong> {{ validity_date }}</p>
+            </div>
+        </div>
+        <div class="client-details">
+            <h3>Bill To:</h3>
+            <p>{{ client_name }}</p>
+            <p>{{ client_address }}</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ "%.2f"|format(item.price) }}</td>
+                    <td>{{ "%.2f"|format(item.quantity * item.price) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="total">
+            Grand Total: {{ "%.2f"|format(total) }}
+        </div>
+        <div class="footer">
+            <div class="terms">
+                <h3>Terms and Conditions</h3>
+                <ul>
+                    {% for term in terms %}
+                    <li>{{ term }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quote</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="company-info">
+            <img src="{{ company.logo_path }}" alt="Company Logo" class="logo-img">
+            <div class="company-details">
+                <h1 class="company-name">{{ company.name }}</h1>
+                <p>{{ company.address }}</p>
+                <p>Phone: {{ company.phone }}</p>
+                <p>Fax: {{ company.fax }}</p>
+                <p>Email: {{ company.email }}</p>
+            </div>
+        </div>
+        <div class="quote-info">
+            <h1 class="quote-title">QUOTE</h1>
+            <table>
+                <tr><td>DATE</td><td>{{ quote_date }}</td></tr>
+                <tr><td>QUOTE #</td><td>{{ quote_number }}</td></tr>
+                <tr><td>CUSTOMER ID</td><td>{{ customer.id }}</td></tr>
+                <tr><td>VALID UNTIL</td><td>{{ valid_until }}</td></tr>
+            </table>
+        </div>
+    </div>
+    <div class="customer-info">
+        <div class="customer-header">CUSTOMER</div>
+        <div class="customer-details">
+            <p><strong>{{ customer.name }}</strong></p>
+            <p>{{ customer.company_name }}</p>
+            <p>{{ customer.address }}</p>
+            <p>{{ customer.city }}, {{ customer.state }} {{ customer.zip }}</p>
+            <p>Phone: {{ customer.phone }}</p>
+            <p>Email: {{ customer.email }}</p>
+        </div>
+    </div>
+
+    <table class="items-table">
+        <thead>
+            <tr>
+                <th>PRODUCT NAME</th>
+                <th>DESCRIPTION</th>
+                <th>UNIT PRICE</th>
+                <th>QTY</th>
+                <th>DISCOUNT</th>
+                <th>AMOUNT</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td><strong>{{ item.product_name }}</strong></td>
+                <td>{{ item.description }}</td>
+                <td class="text-right">{{ currency }} {{ "%.2f"|format(item.unit_price) }}</td>
+                <td class="text-center">{{ item.qty }}</td>
+                <td class="text-right">{{ currency }} {{ "%.2f"|format(item.get('discount_amount', 0.0)) }}</td>
+                <td class="text-right">{{ currency }} {{ "%.2f"|format(item.amount) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="summary">
+        <table class="summary-table">
+            <tr><td>Subtotal</td><td>{{ currency }}</td><td class="text-right">{{ "%.2f"|format(summary.subtotal) }}</td></tr>
+            <tr><td>CGST ({{ "%.2f"|format(cgst_rate) }}%)</td><td>{{ currency }}</td><td class="text-right">{{ "%.2f"|format(summary.cgst_amount) }}</td></tr>
+            <tr><td>SGST ({{ "%.2f"|format(sgst_rate) }}%)</td><td>{{ currency }}</td><td class="text-right">{{ "%.2f"|format(summary.sgst_amount) }}</td></tr>
+            <tr class="total-row"><td><strong>TOTAL</strong></td><td><strong>{{ currency }}</strong></td><td class="text-right"><strong>{{ "%.2f"|format(summary.total) }}</strong></td></tr>
+        </table>
+    </div>
+    <div class="page-footer">
+        <div class="terms">
+            <div class="terms-header">TERMS AND CONDITIONS</div>
+            <div class="terms-content">
+                <ol>
+                    <li>All disputes are subject to Pune jurisdiction only.</li>
+                    <li>Payment will be due prior to delivery of service and goods.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="signature-area">
+            <p class="acceptance">Customer Acceptance (sign below):</p>
+            <div class="signature-line">x</div>
+            <div class="print-name-line"><span>Print Name:</span></div>
+        </div>
+        <div class="final-greeting">
+            <h2>Thank You For Your Business!</h2>
+        </div>
+    </div>
+</body>
+</html>

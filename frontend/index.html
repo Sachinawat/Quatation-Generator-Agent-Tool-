@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotation Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Quotation Generator</h1>
+        
+        <!-- Company Details -->
+        <div class="section">
+            <h2>Company Details</h2>
+            <input type="text" id="company-name" placeholder="Company Name">
+            <textarea id="company-address" placeholder="Company Address"></textarea>
+            <input type="file" id="company-logo" accept="image/*">
+        </div>
+        
+        <!-- Customer Details -->
+        <div class="section">
+            <h2>Customer Details</h2>
+            <input type="text" id="customer-name" placeholder="Customer Name">
+            <textarea id="customer-address" placeholder="Customer Address"></textarea>
+        </div>
+        
+        <!-- Quote Details -->
+        <div class="section">
+            <h2>Quote Details</h2>
+            <input type="text" id="quote-id" placeholder="Quote ID">
+            <input type="date" id="validation-date">
+        </div>
+        
+        <!-- Items -->
+        <div class="section">
+            <h2>Items</h2>
+            <div id="items-container">
+                <!-- Items will be added here dynamically -->
+            </div>
+            <button id="add-item">Add Item</button>
+        </div>
+        
+        <!-- Terms and Conditions -->
+        <div class="section">
+            <h2>Terms and Conditions</h2>
+            <div id="terms-container">
+                <!-- Terms will be added here dynamically -->
+            </div>
+            <button id="add-term">Add Term</button>
+        </div>
+        
+        <!-- Template Selection -->
+        <div class="section">
+            <h2>Select Template</h2>
+            <select id="template-select">
+                <option value="template1">Template 1</option>
+                <option value="template2">Template 2</option>
+                <option value="template3">Template 3</option>
+                <option value="template4">Template 4</option>
+                <option value="template5">Template 5</option>
+                <option value="template6">Template 6</option>
+                <option value="template7">Template 7</option>
+                <option value="template8">Template 8</option>
+                <option value="template9">Template 9</option>
+                <option value="template10">Template 10</option>
+            </select>
+        </div>
+        
+        <button id="generate-pdf">Generate PDF</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

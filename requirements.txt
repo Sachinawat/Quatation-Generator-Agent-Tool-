@@ -1,0 +1,7 @@
+Flask==2.3.2 
+requests 
+streamlit 
+weasyprint 
+Jinja2 
+openai
+Flask-Cors

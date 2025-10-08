@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quotation</title>
+    <style>
+        body { font-family: 'Georgia', serif; font-size: 13px; color: #2C3E50; background-color: #ECF0F1; }
+        .invoice-box { max-width: 800px; margin: auto; padding: 30px; border: 1px solid #BDC3C7; background: #FFFFFF; }
+        .header { text-align: right; margin-bottom: 30px; }
+        .header h1 { color: #2980B9; border-bottom: 2px solid #2980B9; padding-bottom: 10px; }
+        .details-table, .items-table { width: 100%; line-height: inherit; text-align: left; border-collapse: collapse; }
+        .details-table td, .items-table td, .items-table th { padding: 10px; vertical-align: top; }
+        .details-table { margin-bottom: 50px; }
+        .items-table th { background: #34495E; color: #fff; }
+        .items-table .total td { border-top: 2px solid #BDC3C7; font-weight: bold; background-color: #f9f9f9; }
+        .footer { text-align: left; margin-top: 40px; font-size: 11px; color: #7F8C8D; }
+    </style>
+</head>
+<body>
+    <div class="invoice-box">
+        <div class="header">
+            <h1>INVOICE</h1>
+            <p>{{ company.name }}</p>
+        </div>
+        <table class="details-table">
+            <tr>
+                <td>
+                    <strong>To:</strong><br>
+                    {{ customer.name }}<br>
+                    {{ customer.address }}
+                </td>
+                <td>
+                    <strong>Quote #:</strong> {{ quote_number }}<br>
+                    <strong>Date:</strong> {{ quote_date }}<br>
+                    <strong>Due:</strong> {{ valid_until }}
+                </td>
+            </tr>
+        </table>
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Qty</th>
+                    <th>Rate</th>
+                    <th>Line Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.qty }}</td>
+                    <td>{{ currency }}{{ "%.2f"|format(item.unit_price) }}</td>
+                    <td>{{ currency }}{{ "%.2f"|format(item.amount) }}</td>
+                </tr>
+                {% endfor %}
+                <tr class="total">
+                    <td colspan="3">Subtotal</td>
+                    <td>{{ currency }}{{ "%.2f"|format(summary.subtotal) }}</td>
+                </tr>
+                <tr class="total">
+                    <td colspan="3">Grand Total</td>
+                    <td>{{ currency }}{{ "%.2f"|format(summary.total) }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="footer">
+            <strong>Terms:</strong>
+            {% for term in terms %}
+            <p>{{ term }}</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
